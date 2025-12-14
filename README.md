@@ -66,7 +66,7 @@ pip install simpy
 
 2. Open the project in PyCharm or VS Code.
 
-3. Open the Python file (Simulation.py).
+3. Open the Python file (fuelstation.py).
 
 4. Run the program.
 
