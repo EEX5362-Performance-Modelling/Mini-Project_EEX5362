@@ -7,7 +7,7 @@ import statistics
 # -----------------------------
 RANDOM_SEED = 42
 SIM_TIME = 480  # minutes (8 hours)
-EMPLOYEE_COUNT = 2
+EMPLOYEE_COUNT = 3
 IN_HOURS = SIM_TIME/60
 
 # Arrival rates (vehicles per minute)
@@ -139,7 +139,7 @@ def run_simulation(peak=False):
 # MAIN EXECUTION
 # -----------------------------
 if __name__ == "__main__":
-    results = run_simulation(peak=True)
+    results = run_simulation(peak=False)
     
     print("\n----- PARAMETERS -----")
     print("Simulation Duration: ",SIM_TIME, "mins")
