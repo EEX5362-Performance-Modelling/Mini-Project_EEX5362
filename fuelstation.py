@@ -2,40 +2,41 @@ import simpy
 import random
 import statistics
 
-# -----------------------------
-# SIMULATION PARAMETERS
-# -----------------------------
+#SIMULATION PARAMETERS
+
 RANDOM_SEED = 42
 SIM_TIME = 480  # minutes (8 hours)
 EMPLOYEE_COUNT = 3
 IN_HOURS = SIM_TIME/60
 
-# Arrival rates (vehicles per minute)
+#Arrival rates (vehicles per minute)
+
 ARRIVAL_RATE_NORMAL = 1 / 3
 ARRIVAL_RATE_PEAK = 1 / 1.5
 
-# Fuel probabilities
+#Fuel probabilities
+
 FUEL_PROB = {
     "petrol92": 0.7,
     "diesel": 0.25,
     "kerosene": 0.5
 }
 
-# Fueling times (minutes)
+#Fueling times (minutes)
+
 FUEL_TIME = {
     "petrol92": 0.75,
     "diesel": 4,
     "kerosene": 3
 }
 
-# Payment probabilities & times
+#Payment probabilities & times
+
 PAYMENT_PROB = {"cash": 0.85, "card": 0.15}
 PAYMENT_TIME = {"cash": 0.4, "card": 1}
 
 
-# -----------------------------
-# FUEL STATION RESOURCES
-# -----------------------------
+#FUEL STATION RESOURCES
 class FuelStation:
     def __init__(self, env, employees):
         self.env = env
@@ -46,9 +47,8 @@ class FuelStation:
         self.kerosene = simpy.Resource(env, capacity=2)
 
 
-# -----------------------------
-# VEHICLE PROCESS
-# -----------------------------
+#VEHICLE PROCESS
+
 def vehicle(env, name, station, fuel_type, results):
     arrival_time = env.now
 
@@ -93,9 +93,7 @@ def vehicle(env, name, station, fuel_type, results):
     results["vehicles"] += 1
 
 
-# -----------------------------
-# VEHICLE GENERATOR
-# -----------------------------
+#VEHICLE GENERATOR
 def generator(env, station, arrival_rate, results):
     i = 0
     while True:
@@ -108,9 +106,7 @@ def generator(env, station, arrival_rate, results):
         env.process(vehicle(env, f"Vehicle-{i}", station, fuel_type, results))
 
 
-# -----------------------------
-# RUN SIMULATION
-# -----------------------------
+#RUN SIMULATION
 def run_simulation(peak=False):
     random.seed(RANDOM_SEED)
     env = simpy.Environment()
@@ -135,9 +131,7 @@ def run_simulation(peak=False):
     return results
 
 
-# -----------------------------
-# MAIN EXECUTION
-# -----------------------------
+#MAIN EXECUTION
 if __name__ == "__main__":
     results = run_simulation(peak=False)
     
